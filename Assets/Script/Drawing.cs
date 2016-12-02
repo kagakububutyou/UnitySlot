@@ -32,6 +32,12 @@ public class Drawing : MonoBehaviour {
     private Text Result;
 
     /// <summary>
+    /// カウント判定
+    /// </summary>
+    [SerializeField]
+    private TimesDrawing timesDrawing = new TimesDrawing();
+
+    /// <summary>
     /// 最初に呼ぶやつ
     /// </summary>
     void Start ()
@@ -56,11 +62,13 @@ public class Drawing : MonoBehaviour {
 
         if(iRandNum % Parameter == 0)
         {
+            timesDrawing.GetHit();
             Result.text = "あたり";
             Debug.Log("あたり");
         }
         else
         {
+            timesDrawing.GetLose();
             Result.text = "ハズレ";
             Debug.Log("ハズレ");
         }
