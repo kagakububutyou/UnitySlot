@@ -38,6 +38,12 @@ public class Drawing : MonoBehaviour {
     private TimesDrawing timesDrawing = new TimesDrawing();
 
     /// <summary>
+    /// 所持コイン
+    /// </summary>
+    [SerializeField]
+    private PossessionCoin possessionCoin = new PossessionCoin();
+
+    /// <summary>
     /// 最初に呼ぶやつ
     /// </summary>
     void Start ()
@@ -53,6 +59,29 @@ public class Drawing : MonoBehaviour {
 	
 	}
 
+
+    /// <summary>
+    /// 当たり
+    /// </summary>
+    private void Hit()
+    {
+        timesDrawing.GetHit();
+        possessionCoin.Increase();
+        Result.text = "あたり";
+        Debug.Log("あたり");
+    }
+
+    /// <summary>
+    /// ハズレ
+    /// </summary>
+    private void Lose()
+    {
+        timesDrawing.GetLose();
+        possessionCoin.Reduce();
+        Result.text = "ハズレ";
+        Debug.Log("ハズレ");
+    }
+
     /// <summary>
     /// 抽選を引く
     /// </summary>
@@ -62,15 +91,11 @@ public class Drawing : MonoBehaviour {
 
         if(iRandNum % Parameter == 0)
         {
-            timesDrawing.GetHit();
-            Result.text = "あたり";
-            Debug.Log("あたり");
+            Hit();
         }
         else
         {
-            timesDrawing.GetLose();
-            Result.text = "ハズレ";
-            Debug.Log("ハズレ");
+            Lose();
         }
 
         Debug.Log(iRandNum % Parameter);
